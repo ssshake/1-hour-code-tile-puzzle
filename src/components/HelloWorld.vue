@@ -110,8 +110,8 @@ export default {
 
 <style scoped>
     .tile {
-        width: 60px;
-        height: 60px;
+        width: 166px;
+        height: 166px;
         border: 1px solid black;
         box-sizing: border-box;
         cursor: pointer;
@@ -119,56 +119,56 @@ export default {
     }
     .empty{
         background-color: grey;
-        width: 60px;
-        height: 60px;
+        width: 166px;
+        height: 166px;
     }
 
     .tile-container {
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        width: 182px;
+        width: 500px;
         border: 1px solid black;
         background-color: grey;
     }
     .A {
         background:  url(../assets/A.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }
     .B {
         background:  url(../assets/B.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }
     .C {
         background:  url(../assets/C.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }
     .D {
         background:  url(../assets/D.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }
     .E {
         background:  url(../assets/E.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }
     .F {
         background:  url(../assets/F.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     } 
     .G {
         background:  url(../assets/G.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     } 
     .H {
         background:  url(../assets/H.png);
         background-repeat: no-repeat;
-        background-size: 60px 60px;
+        background-size: 166px 166px;
     }                  
 </style>
