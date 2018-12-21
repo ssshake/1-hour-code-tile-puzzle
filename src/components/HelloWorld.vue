@@ -1,58 +1,138 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="tile-container">
+      <div class="tile" @click="clicktile(key)" v-for="(value, key, index) in shuffledPieces" :key="index">
+          <div v-if="value != 'empty'">
+            {{value}}
+          </div>
+          <div v-else class="empty">
+          </div>
+      </div>
   </div>
 </template>
 
 <script>
+
+import _ from 'lodash';
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data() { 
+      return {
+        pieces: ["A", "B", "C", "D", "E", "F", "G", "H",  "empty"],
+        shuffledPieces: [],
+    }
+  },
+  created(){
+      this.shuffledPieces = _.shuffle(this.pieces);
+  },
+  methods: {
+      clicktile(i){
+          console.log('tile clicked');
+          console.log(i)
+
+
+        console.log((i + 1) % 3 )
+        if ((i + 1) % 3 === 0){
+            console.log("you are at the end of a row")
+            this.checkUp(i)
+            this.checkDown(i)
+            this.checkLeft(i)
+
+        }
+        if ((i + 1) % 3 === 1){
+            console.log("you are at the beginning of a row")
+            this.checkUp(i)
+            this.checkDown(i)
+            this.checkRight(i)
+        }
+        if ((i + 1) % 3 === 2){
+            console.log("you are at the middle of a row")
+            this.checkUp(i)
+            this.checkDown(i)
+            this.checkLeft(i)
+            this.checkRight(i)
+        }
+
+
+      },
+      checkUp(index){
+        let up = index - 3
+
+        if (up >= 0){
+            if (this.shuffledPieces[up] === "empty"){
+                console.log("YOU ARE BELOW AN EMPTY PIECE")
+                this.swap(up, index)
+            }
+        }
+      },
+      checkDown(index){
+        let down = index + 3
+        if (down <= this.shuffledPieces.length){
+            if (this.shuffledPieces[down] === "empty"){
+                console.log("YOU ARE ABOVE AN EMPTY PIECE")
+                this.swap(down, index)
+            }
+        }
+      },
+      checkLeft(index){
+        let left = index - 1
+        if (left >= 0){
+            if (this.shuffledPieces[left] === "empty"){
+                console.log("YOU ARE TO THE RIGHT OF AN EMPTY PIECE")
+                this.swap(left, index)
+            }
+        }
+      },
+    checkRight(index){
+        let right = index + 1
+        if (right <= this.shuffledPieces.length){
+            if (this.shuffledPieces[right] === "empty"){
+                console.log("YOU ARE TO THE LEFT OF AN EMPTY PIECE")
+                this.swap(right, index)
+            }
+        }
+      },
+      swap(empty, index){
+        console.log(`swapping ${index} with ${empty}`)
+        let tempArr = [ ...this.shuffledPieces]
+        var b = tempArr[empty];
+        tempArr[empty] = tempArr[index];
+        tempArr[index] = b;
+        this.shuffledPieces = [ ...tempArr]
+        this.validate()
+      },
+      validate(){
+          if (this.pieces.toString() === this.shuffledPieces.toString()){
+              alert("YOU WIN!")
+          } else {
+              console.log("YOU ARE NOT A WINNER")
+          }
+      }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+    .tile {
+        width: 60px;
+        height: 60px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        cursor: pointer;
+        background-color: white;
+    }
+    .empty{
+        background-color: grey;
+        width: 60px;
+        height: 60px;
+    }
+
+    .tile-container {
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        width: 182px;
+        border: 1px solid black;
+        background-color: grey;
+    }
 </style>
