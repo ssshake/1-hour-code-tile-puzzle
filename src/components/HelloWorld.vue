@@ -1,8 +1,8 @@
 <template>
   <div class="tile-container">
-      <div class="tile" @click="clicktile(key)" v-for="(value, key, index) in shuffledPieces" :key="index">
+      <div class="tile" :class="value" @click="clicktile(key)" v-for="(value, key, index) in shuffledPieces" :key="index">
           <div v-if="value != 'empty'">
-            {{value}}
+            <!-- {{value}} -->
           </div>
           <div v-else class="empty">
           </div>
@@ -27,11 +27,7 @@ export default {
   },
   methods: {
       clicktile(i){
-          console.log('tile clicked');
-          console.log(i)
 
-
-        console.log((i + 1) % 3 )
         if ((i + 1) % 3 === 0){
             console.log("you are at the end of a row")
             this.checkUp(i)
@@ -135,4 +131,44 @@ export default {
         border: 1px solid black;
         background-color: grey;
     }
+    .A {
+        background:  url(../assets/A.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }
+    .B {
+        background:  url(../assets/B.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }
+    .C {
+        background:  url(../assets/C.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }
+    .D {
+        background:  url(../assets/D.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }
+    .E {
+        background:  url(../assets/E.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }
+    .F {
+        background:  url(../assets/F.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    } 
+    .G {
+        background:  url(../assets/G.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    } 
+    .H {
+        background:  url(../assets/H.png);
+        background-repeat: no-repeat;
+        background-size: 60px 60px;
+    }                  
 </style>
