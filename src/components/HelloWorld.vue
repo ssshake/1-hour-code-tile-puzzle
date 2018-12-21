@@ -108,7 +108,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
+    body{
+        background-color: rgb(44, 44, 44);
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+        align-items: center;
+    }
     .tile {
         width: 166px;
         height: 166px;
